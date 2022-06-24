@@ -191,7 +191,7 @@ jobs:
             yum install epel-release -y
             yum repolist -y
             yum install python3 -y
-            pip3 install -y ansible 
+            pip3 install ansible 
       - run:
           name: Configure server
           command: |
