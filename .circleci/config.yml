@@ -22,7 +22,7 @@ commands:
       - run:
           name: install tar gzip
           command: |
-            yum install -y tar gzip          
+            sudo apt-get install -y tar gzip           
 
   install-aws:
     description: install aws
