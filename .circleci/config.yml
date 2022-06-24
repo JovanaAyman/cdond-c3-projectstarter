@@ -188,8 +188,8 @@ jobs:
           name: Install dependencies
           command: |
             yum update
-            yum install software-properties-common
-            yum-yum-repository --yes --update ppa:ansible/ansible
+            yum install epel-release
+            rpm -ivh epel-release-latest-5.noarch.rpm
             yum install ansible
       - run:
           name: Configure server
