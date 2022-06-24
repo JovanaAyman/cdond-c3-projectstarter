@@ -178,15 +178,15 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            sudo yum install -y tar gzip
-            sudo yum update
-            sudo yum install software-properties-common
-            sudo yum-yum-repository --yes --update ppa:ansible/ansible
-            sudo yum install ansible
+            yum install -y tar gzip
+            yum update
+            yum install software-properties-common
+            yum-yum-repository --yes --update ppa:ansible/ansible
+            yum install ansible
       - run:
           name: Configure server
           command: |
-            sudo yum install -y tar gzip
+            yum install -y tar gzip
             cd ./circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt configure-server.yml
