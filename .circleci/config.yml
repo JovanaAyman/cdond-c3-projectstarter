@@ -24,6 +24,14 @@ commands:
           command: |
             yum install -y tar gzip          
 
+  install-aws:
+    description: install aws
+    steps:
+      - run:
+          name: install aws
+          command: |
+            sudo apt-get update
+            sudo apt-get install awscli
 #   revert-migrations:
 #     description: Revert the last migration if successfully run in the current workflow.
 #     parameters:
@@ -176,10 +184,11 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: amazon/aws-cli
+      - image: cimg/base:stable
     steps:
       - checkout
       - install-tar
+      - install-aws
       - add_ssh_keys:
           fingerprints: ["c1:7f:9e:f7:2a:3f:40:86:a9:a4:c3:6a:3c:39:29:9e"]
       - attach_workspace:
@@ -187,11 +196,13 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
-            yum install epel-release -y
-            yum repolist -y
-            yum install python3 -y
-            pip3 install ansible 
+            sudo apt-get install -y tar gzip
+            sudo apt update
+            sudo apt install software-properties-common
+            sudo add-apt-repository --yes --update ppa:ansible/ansible
+            sudo apt-get install -y pip
+            sudo apt-get install -y python3
+            sudo pip3 install ansible
       - run:
           name: Configure server
           command: |
