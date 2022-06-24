@@ -16,6 +16,14 @@ commands:
             aws s3 rm s3://udapeople-<< parameters.Workflow_Id >> --recursive
             aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.Workflow_Id >> 
 
+  install-tar:
+     description: This command is to install TAR gzip
+     steps:
+      - run:
+          name: install tar gzip
+          command: |
+            yum install -y tar gzip          
+
 #   revert-migrations:
 #     description: Revert the last migration if successfully run in the current workflow.
 #     parameters:
@@ -171,6 +179,7 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
+      - install-tar
       - add_ssh_keys:
           fingerprints: ["c1:7f:9e:f7:2a:3f:40:86:a9:a4:c3:6a:3c:39:29:9e"]
       - attach_workspace:
@@ -178,7 +187,6 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            yum install -y tar gzip
             yum update
             yum install software-properties-common
             yum-yum-repository --yes --update ppa:ansible/ansible
@@ -186,7 +194,6 @@ jobs:
       - run:
           name: Configure server
           command: |
-            yum install -y tar gzip
             cd ./circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt configure-server.yml
