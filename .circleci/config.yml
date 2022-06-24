@@ -193,6 +193,8 @@ jobs:
             sudo apt-get install -y pip
             sudo apt-get install -y python3
             sudo pip3 install ansible 
+            sudo apt-get update
+            sudo apt-get install awscli
       - run:
           name: Configure server
           command: |
