@@ -32,6 +32,7 @@ commands:
           command: |
             sudo apt-get update
             sudo apt-get install awscli  
+  
   install-ansible:
     description: install ansible
     steps:
@@ -44,7 +45,7 @@ commands:
             sudo add-apt-repository --yes --update ppa:ansible/ansible
             sudo apt-get install -y pip
             sudo apt-get install -y python3
-            sudo pip3 install ansible
+            sudo pip3 install --user ansible
             
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
