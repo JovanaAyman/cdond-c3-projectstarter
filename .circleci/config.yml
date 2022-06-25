@@ -302,6 +302,7 @@ jobs:
       - install-aws
       - install-tar
       - install-ansible
+      - install-nodejs
       - add_ssh_keys:
           fingerprints: ["c1:7f:9e:f7:2a:3f:40:86:a9:a4:c3:6a:3c:39:29:9e"]
       - attach_workspace:
