@@ -44,6 +44,7 @@ commands:
             sudo apt update
             sudo apt install software-properties-common
             sudo add-apt-repository --yes --update ppa:ansible/ansible
+            sudo add-apt-repository --remove ppa:qbittorrent-team/qbittorrent-stable
             sudo apt-get install -y pip
             sudo apt-get install -y python3
             sudo pip3 install --user ansible
