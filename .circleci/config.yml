@@ -43,10 +43,18 @@ commands:
             sudo apt update
             sudo apt install software-properties-common
             sudo add-apt-repository --yes --update ppa:ansible/ansible
-            sudo add-apt-repository --remove ppa:qbittorrent-team/qbittorrent-stable
             sudo apt-get install -y pip
             sudo apt-get install -y python3
             sudo pip3 install --user ansible
+
+  install-nodejs:
+    description: install node.js
+    steps:
+      - run:
+          name: install node.js
+          command: |
+            curl -fsSL https://deb.nodesource.com/setup_13.x | sudo  -E bash
+            sudo apt install -y nodejs
             
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
@@ -256,6 +264,7 @@ jobs:
       - checkout
       - install-aws
       - install-tar
+      - install-nodejs
       - restore_cache:
           keys: [frontend-dependencies]
       - run:
@@ -287,7 +296,7 @@ jobs:
                     
   deploy-backend:
     docker:
-      - image: circleci/node:13.8.0
+      - image: cimg/base:stable
     steps:
       - checkout
       - install-aws
