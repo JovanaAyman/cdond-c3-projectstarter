@@ -45,7 +45,7 @@ commands:
             sudo add-apt-repository --yes --update ppa:ansible/ansible
             sudo apt-get install -y pip
             sudo apt-get install -y python3
-            sudo pip3 install --user ansible
+            sudo pip3 install ansible
 
   install-nodejs:
     description: install node.js
