@@ -32,7 +32,20 @@ commands:
           command: |
             sudo apt-get update
             sudo apt-get install awscli  
-
+  install-ansible:
+    description: install ansible
+    steps:
+      - run:
+          name: install ansible
+          command: |
+            sudo apt-get install -y tar gzip
+            sudo apt update
+            sudo apt install software-properties-common
+            sudo add-apt-repository --yes --update ppa:ansible/ansible
+            sudo apt-get install -y pip
+            sudo apt-get install -y python3
+            sudo pip3 install ansible
+            
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
     parameters:
@@ -276,6 +289,8 @@ jobs:
     steps:
       - checkout
       - install-aws
+      - install-tar
+      - install-ansible
       - add_ssh_keys:
           fingerprints: ["c1:7f:9e:f7:2a:3f:40:86:a9:a4:c3:6a:3c:39:29:9e"]
       - attach_workspace:
