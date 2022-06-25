@@ -40,8 +40,10 @@ commands:
           name: install ansible
           command: |
             sudo apt-get install -y tar gzip
+            sudo add-apt-repository --remove ppa:qbittorrent-team/qbittorrent-stable
             sudo apt update
             sudo apt install software-properties-common
+            sudo add-apt-repository --yes --update ppa:ansible/ansible
             sudo apt-get install -y pip
             sudo apt-get install -y python3
             sudo pip3 install --user ansible
